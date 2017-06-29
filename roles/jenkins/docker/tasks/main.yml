@@ -1,0 +1,16 @@
+---
+- file: path={{persistent_store}} state=directory mode=0755 owner={{remote_user}}
+- file: path={{jenkins_dir}} state=directory mode=0755 owner={{remote_user}}
+- copy: content="{{jenkins_public}}" dest="{{jenkins_dir}}/jenkins.crt" owner={{remote_user}} mode=0644
+- copy: content="{{jenkins_private}}" dest="{{jenkins_dir}}/jenkins.key" owner={{remote_user}} mode=0600
+
+- name: check for running jenkins
+  shell: docker ps --filter name=jenkins -q
+  changed_when: False
+  register: runningjenkins
+
+- block:
+  - name: start jenkins
+    shell: docker run -d -p 443:8443 -p 50000:50000 --restart always --hostname jenkins --name jenkins --volume {{jenkins_dir}}:/var/jenkins_home jenkins --httpPort=-1 --httpsPort=8443 --httpsCertificate=/var/jenkins_home/jenkins.crt --httpsPrivateKey=/var/jenkins_home/jenkins.key
+
+  when: runningjenkins.stdout == ""

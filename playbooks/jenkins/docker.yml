@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  vars:
+      persistent_store: "/home/terry/persistent"
+      jenkins_dir: "{{persistent_store}}/jenkins"
+      remote_user: "terry"
+      jenkins_user_name: "neko"
+      jenkins_user_password: "case"
+  roles:
+    - role: jenkins/docker

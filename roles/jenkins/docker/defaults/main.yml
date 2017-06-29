@@ -1,0 +1,4 @@
+---
+jenkins_version: latest
+jenkins_public: "public_key_contents"
+jenkins_private: "private_key_contents"
