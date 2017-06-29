@@ -6,12 +6,12 @@
       remote_user: "terry"
       jenkins_user_name: "neko"
       jenkins_user_password: "case"
+      jenkins_user_email: "neko@example.com"
   roles:
     - role: jenkins/user
     #- role: jenkins/enablesecurity
     #- role: jenkins/environment
     #  envvars:
-    #    - name: CUSTOMER_NAME
-    #      value: "{{customer.shortname}}"
-    #- role: quay/customer/getcreds
+    #    - name: USER_NAME
+    #      value: "{{jenkins_user_name}}"
     #- role: jenkins/credentials
