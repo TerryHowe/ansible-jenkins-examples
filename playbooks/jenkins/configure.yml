@@ -7,9 +7,11 @@
       jenkins_user_name: "neko"
       jenkins_user_password: "case"
       jenkins_user_email: "neko@example.com"
+      jenkins_cli_jar: "/var/jenkins_home/war/WEB-INF/jenkins-cli.jar"
+      jenkins_cli_groovy: "java -jar {{jenkins_cli_jar}} -s http://localhost:8080 -i /var/jenkins_home/.ssh/id_rsa groovy ="
   roles:
     - role: jenkins/user
-    #- role: jenkins/enablesecurity
+    - role: jenkins/enablesecurity
     #- role: jenkins/environment
     #  envvars:
     #    - name: USER_NAME
